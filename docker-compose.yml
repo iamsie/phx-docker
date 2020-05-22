@@ -1,0 +1,30 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./docker/elixir
+    working_dir: /src
+    volumes:
+      - ./src:/src
+    environment:
+      - "DB_USERNAME=${DB_USERNAME}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
+      - "DB_NAME=${DB_NAME}"
+      - "DB_HOST=${DB_HOST}"
+      - "TG_BOT_TOKEN=${TG_BOT_TOKEN}"
+      - "WEB_HOOK_URL=${WEB_HOOK_URL}"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.2
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    restart: always
+    volumes:
+      - ${PWD}/docker/db/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
