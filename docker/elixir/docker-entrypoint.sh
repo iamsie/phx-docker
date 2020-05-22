@@ -7,10 +7,10 @@ set "MIX_ENV=dev" && mix compile
 #   sleep 1
 # done
 # Ensure we have the basics...
+
 mix local.hex --force
 mix local.rebar --force
 mix deps.clean mime --build
 mix deps.get
-mix ecto.create
-mix ecto.migrate
+npm install --prefix assets
 mix phx.server
