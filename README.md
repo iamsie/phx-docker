@@ -1,4 +1,4 @@
-# MonoCard
+# Docker file for Elixir  + Node
 
 To start your Phoenix server:
 
